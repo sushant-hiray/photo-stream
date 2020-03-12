@@ -29,13 +29,13 @@
 	{% for image in images limit: 20 %}
 		{% capture image_path %}photos/original/{{ image.name }}{% endcapture %}
 		<entry>
-			<title type="html">{{ image.name | strip_extension }}</title>
+			<title type="html">{{ image.name | strip_extension | escape }}</title>
 			<link href="{{ site.url }}/{{ image.name | strip_extension | slugify | escape  }}/" rel="alternate" type="text/html" title="{{ image.name | strip_extension | escape }}" />
 			<published>{{ site.time | date_to_xmlschema }}</published>
 			<updated>{{ site.time | date_to_xmlschema }}</updated>
 			<id>{{ site.url }}/{{ image.name | strip_extension | slugify }}/</id>
 			<content type="html">
-				<![CDATA[<figure><a href="{{ site.url }}/{{ image.name | strip_extension | slugify | escape  }}/"><img src="{{ site.url }}{{ image.name | uri_escape | processed_path: 'large' }}" alt="{{ image.name | strip_extension }}" /></a></figure>]]>
+				<![CDATA[<figure><a href="{{ site.url }}/{{ image.name | strip_extension | slugify | escape  }}/"><img src="{{ site.url }}{{ image.name | uri_escape | processed_path: 'large' }}" alt="{{ image.name | strip_extension | escape }}" /></a></figure>]]>
 			</content>
 			{% if site.author %}
 				<author>
