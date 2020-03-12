@@ -29,13 +29,13 @@
 	{% for image in images limit: 20 %}
 		{% capture image_path %}photos/original/{{ image.name }}{% endcapture %}
 		<entry>
-			<title type="html">{{ image.name | strip_extension | escape }}</title>
-			<link href="{{ site.url }}/{{ image.name | strip_extension | slugify | escape  }}/" rel="alternate" type="text/html" title="{{ image.name | strip_extension | escape }}" />
+			<title type="html">{{ image.name | strip_extension | xml_escape }}</title>
+			<link href="{{ site.url }}/{{ image.name | strip_extension | slugify | xml_escape  }}/" rel="alternate" type="text/html" title="{{ image.name | strip_extension | xml_escape }}" />
 			<published>{{ site.time | date_to_xmlschema }}</published>
 			<updated>{{ site.time | date_to_xmlschema }}</updated>
 			<id>{{ site.url }}/{{ image.name | strip_extension | slugify }}/</id>
 			<content type="html">
-				<![CDATA[<figure><a href="{{ site.url }}/{{ image.name | strip_extension | slugify | escape  }}/"><img src="{{ site.url }}{{ image.name | uri_escape | processed_path: 'large' }}" alt="{{ image.name | strip_extension | escape }}" /></a></figure>]]>
+				<![CDATA[<figure><a href="{{ site.url }}/{{ image.name | strip_extension | slugify | xml_escape  }}/"><img src="{{ site.url }}{{ image.name | xml_escape | processed_path: 'large' }}" alt="{{ image.name | strip_extension | xml_escape }}" /></a></figure>]]>
 			</content>
 			{% if site.author %}
 				<author>
@@ -50,8 +50,8 @@
 					{% endif %}
 				</author>
 			{% endif %}
-			<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ site.url }}{{ image.name | uri_escape | processed_path: 'large' }}" />
-			<media:content medium="image" url="{{ site.url }}{{ image.name | uri_escape | processed_path: 'large' }}" xmlns:media="http://search.yahoo.com/mrss/" />
+			<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ site.url }}{{ image.name | xml_escape | processed_path: 'large' }}" />
+			<media:content medium="image" url="{{ site.url }}{{ image.name | xml_escape | processed_path: 'large' }}" xmlns:media="http://search.yahoo.com/mrss/" />
 		</entry>
 	{% endfor %}
 </feed>
